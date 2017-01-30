@@ -6,10 +6,10 @@ RUN yum -y update
 RUN yum -y groupinstall 'Development Tools'
 RUN yum -y install epel-release \
                    wget \
-				   openssl \
-				   openssl-devel \
-				   zlib-devel \
-				   pcre-devel
+		   openssl \
+		   openssl-devel \
+		   zlib-devel \
+		   pcre-devel
 RUN yum clean all 
 RUN useradd builder 
 RUN mkdir -p /opt/lib

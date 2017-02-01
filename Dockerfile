@@ -1,6 +1,6 @@
 FROM centos:latest
 ENV container docker
-MAINTAINER "Reynier de la Rosa" <reynier.delarosa@overon.es>
+MAINTAINER "Reynier de la Rosa" <reynier.delarosa@outlook.es>
 
 RUN yum -y update
 RUN yum -y groupinstall 'Development Tools'

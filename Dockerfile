@@ -26,6 +26,7 @@ RUN ln -sf /dev/stderr /var/log/nginx/error.log
 EXPOSE 80 443
 
 ADD container-files/script/* /tmp/script/
+RUN chmod +x /tmp/script/bootstrap.sh
 
 # put customized config and code files to /data
 

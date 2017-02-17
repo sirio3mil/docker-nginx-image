@@ -13,12 +13,12 @@ RUN yum -y install epel-release \
 RUN yum clean all 
 RUN useradd builder 
 RUN mkdir -p /opt/lib
-RUN wget https://www.openssl.org/source/openssl-1.1.0d.tar.gz -O /opt/lib/openssl-1.1.0d.tar.gz
+RUN wget https://www.openssl.org/source/openssl-1.1.0e.tar.gz -O /opt/lib/openssl-1.1.0e.tar.gz
 RUN tar -zxvf /opt/lib/open* -C /opt/lib
-RUN rpm -ivh http://nginx.org/packages/mainline/centos/7/SRPMS/nginx-1.11.9-1.el7.ngx.src.rpm
-RUN sed -i "s|--with-http_ssl_module|--with-http_ssl_module --with-openssl=/opt/lib/openssl-1.1.0d|g" /root/rpmbuild/SPECS/nginx.spec
+RUN rpm -ivh http://nginx.org/packages/mainline/centos/7/SRPMS/nginx-1.11.10-1.el7.ngx.src.rpm
+RUN sed -i "s|--with-http_ssl_module|--with-http_ssl_module --with-openssl=/opt/lib/openssl-1.1.0e|g" /root/rpmbuild/SPECS/nginx.spec
 RUN rpmbuild -ba --clean /root/rpmbuild/SPECS/nginx.spec
-RUN rpm -Uvh --force /root/rpmbuild/RPMS/x86_64/nginx-1.11.9-1.el7.centos.ngx.x86_64.rpm
+RUN rpm -Uvh --force /root/rpmbuild/RPMS/x86_64/nginx-1.11.10-1.el7.centos.ngx.x86_64.rpm
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log

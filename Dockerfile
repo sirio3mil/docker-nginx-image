@@ -18,7 +18,7 @@ RUN tar -zxvf /opt/lib/open* -C /opt/lib
 RUN rpm -ivh http://nginx.org/packages/mainline/centos/7/SRPMS/nginx-1.13.5-1.el7.ngx.src.rpm
 RUN sed -i "s|--with-http_ssl_module|--with-http_ssl_module --with-openssl=/opt/lib/openssl-1.1.0f|g" /root/rpmbuild/SPECS/nginx.spec
 RUN rpmbuild -ba --clean /root/rpmbuild/SPECS/nginx.spec
-RUN rpm -Uvh --force /root/rpmbuild/RPMS/x86_64/nginx-1.13.5-1.el7.ngx.src.rpm
+RUN rpm -Uvh --force /root/rpmbuild/RPMS/x86_64/nginx-1.13.5-1.el7.ngx.x86_64.rpm
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log

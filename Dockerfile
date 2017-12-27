@@ -9,7 +9,8 @@ RUN yum -y install epel-release \
                    openssl \
                    openssl-devel \
                    zlib-devel \
-                   pcre-devel
+                   pcre-devel \
+                   redhat-lsb-core
 RUN yum clean all 
 RUN useradd builder 
 RUN mkdir -p /opt/lib

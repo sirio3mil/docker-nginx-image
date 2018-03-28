@@ -1,3 +1,4 @@
 #!/bin/bash
-/etc/rc.d/init.d/spawn-fcgi start
+service spawn-fcgi start
+service php-fpm start
 nginx -g "daemon off;"

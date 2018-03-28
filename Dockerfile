@@ -29,7 +29,7 @@ RUN yum -y install freedts \
                    perl-Spreadsheet-WriteExcel \
                    perl-Excel-Writer-XLSX \
                    perl-Crypt-RC4
-                   
+
 RUN wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 RUN rpm -Uvh remi-release-7*.rpm
 RUN yum-config-manager --enable remi-php72
@@ -38,7 +38,8 @@ RUN ACCEPT_EULA=Y yum install -y msodbcsql msodbcsql17 mssql-tools unixODBC-deve
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 RUN source ~/.bashrc
-RUN yum install -y gettext \ 
+
+RUN yum -y install gettext \ 
                php-fpm \ 
                php-cli \
                php-common \

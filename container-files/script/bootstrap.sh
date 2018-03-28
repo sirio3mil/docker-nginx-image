@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir /run/php-fpm
 /etc/rc.d/init.d/spawn-fcgi start
-/etc/init.d/php-fpm start
+php-fpm 
 nginx -g "daemon off;"

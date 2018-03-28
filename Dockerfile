@@ -29,6 +29,45 @@ RUN yum -y install freedts \
                    perl-Spreadsheet-WriteExcel \
                    perl-Excel-Writer-XLSX \
                    perl-Crypt-RC4
+                   
+RUN wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+RUN rpm -Uvh remi-release-7*.rpm
+RUN yum-config-manager --enable remi-php72
+RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/mssql-release.repo
+RUN ACCEPT_EULA=Y yum install -y msodbcsql msodbcsql17 mssql-tools unixODBC-devel
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
+RUN source ~/.bashrc
+RUN yum install -y gettext \ 
+               php-fpm \ 
+               php-cli \
+               php-common \
+               php-gd \
+               php-intl \
+               php-json \
+               php-ldap \
+               php-mbstring \
+               php-mcrypt \
+               php-opcache \
+               php-pdo \
+               php-pecl-zip \
+               php-soap \
+               php-xml \
+               php-mysqlnd \
+               php-pecl-uuid \
+               php-bcmath \
+               mediainfo \
+               openldap-clients \
+               php-mhash \
+               php-xsl \
+               php-pear \
+               php-soap \
+               php-pecl-mongodb \
+               php-pecl-couchbase \
+               php-pecl-apcu \
+               php-pdo-dblib \
+               php-sqlsrv                   
+
 RUN yum clean all 
 RUN useradd builder 
 RUN mkdir -p /opt/lib
@@ -41,6 +80,7 @@ RUN rpm -Uvh --force /root/rpmbuild/RPMS/x86_64/nginx-1.13.10-1.el7_4.ngx.x86_64
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
+RUN ln -sf /dev/stderr /var/log/php-fpm/error.log
 
 RUN wget https://driesrpms.eu/redhat/el7/en/x86_64/dries.all/RPMS/perl-Class-Multimethods-1.70-1.2.el7.rf.noarch.rpm
 RUN wget https://driesrpms.eu/redhat/el7/en/x86_64/dries.all/RPMS/perl-Quantum-Superpositions-2.02-1.2.el7.rf.noarch.rpm
@@ -55,6 +95,9 @@ RUN cd gnosek-fcgiwrap-99c942c && autoreconf -i && ./configure && make && make i
 
 RUN echo -e 'OPTIONS="-u nginx -g nginx -a 127.0.0.1 -p 9090 -P /var/run/spawn-fcgi.pid -- /usr/local/sbin/fcgiwrap"' >> /etc/sysconfig/spawn-fcgi
  
+
+
+
 EXPOSE 80 443
 
 ADD container-files/script/* /tmp/script/

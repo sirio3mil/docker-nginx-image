@@ -14,7 +14,7 @@ RUN yum -y install epel-release \
 RUN yum clean all 
 RUN useradd builder 
 RUN mkdir -p /opt/lib
-RUN wget https://www.openssl.org/source/openssl-1.1.0g.tar.gz -O /opt/lib/openssl-1.1.0g.tar.gz
+RUN wget https://www.openssl.org/source/openssl-1.1.0h.tar.gz -O /opt/lib/openssl-1.1.0h.tar.gz
 RUN tar -zxvf /opt/lib/open* -C /opt/lib
 RUN rpm -ivh http://nginx.org/packages/mainline/centos/7/SRPMS/nginx-1.13.12-1.el7_4.ngx.src.rpm
 RUN sed -i "s|--with-http_ssl_module|--with-http_ssl_module --with-openssl=/opt/lib/openssl-1.1.0g|g" /root/rpmbuild/SPECS/nginx.spec

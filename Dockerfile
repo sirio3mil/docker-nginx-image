@@ -67,17 +67,18 @@ RUN yum -y install gettext \
                php-pecl-couchbase \
                php-pecl-apcu \
                php-pdo-dblib \
-               php-sqlsrv                   
-
+               freetds \
+               php-sqlsrv \
+               php-pdo-sqlsrv 
 RUN yum clean all 
 RUN useradd builder 
 RUN mkdir -p /opt/lib
 RUN wget https://www.openssl.org/source/openssl-1.1.0h.tar.gz -O /opt/lib/openssl-1.1.0h.tar.gz
 RUN tar -zxvf /opt/lib/open* -C /opt/lib
-RUN rpm -ivh http://nginx.org/packages/mainline/centos/7/SRPMS/nginx-1.13.12-1.el7_4.ngx.src.rpm
+RUN rpm -ivh http://nginx.org/packages/mainline/centos/7/SRPMS/nginx-1.15.0-1.el7_4.ngx.src.rpm
 RUN sed -i "s|--with-http_ssl_module|--with-http_ssl_module --with-openssl=/opt/lib/openssl-1.1.0h|g" /root/rpmbuild/SPECS/nginx.spec
 RUN rpmbuild -ba --clean /root/rpmbuild/SPECS/nginx.spec
-RUN rpm -Uvh --force /root/rpmbuild/RPMS/x86_64/nginx-1.13.12-1.el7_4.ngx.x86_64.rpm
+RUN rpm -Uvh --force /root/rpmbuild/RPMS/x86_64/nginx-1.15.0-1.el7_4.ngx.x86_64.rpm
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log

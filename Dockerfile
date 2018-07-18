@@ -70,7 +70,8 @@ RUN yum -y install gettext \
                freetds \
                php-sqlsrv \
                php-pdo-sqlsrv \
-               libmemcached
+               libmemcached \
+               php-pecl-memcached
 RUN yum clean all 
 RUN useradd builder 
 RUN mkdir -p /opt/lib
